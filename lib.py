@@ -60,26 +60,26 @@ def generate_report(filename, title, summary, data):
 
     report.build([report_title, empty_line, report_info])
 
- def generate_email(sender, receiver, subject, body = None, file = None):
-     msg = EmailMessage()
-     msg['Subject'] = subject
-     msg['From'] = sender
-     msg['To'] = receiver
-     if body != None:
-         msg.set_content(body)
+def generate_email(sender, receiver, subject, body = None, file = None):
+    msg = EmailMessage()
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = receiver
+    if body != None:
+        msg.set_content(body)
 
-     if file != None:
-         msg.attach(MIMEText(message, "plain"))
-            with open(file, "rb") as f:
-                #attach = email.mime.application.MIMEApplication(f.read(),_subtype="pdf")
-                attach = MIMEApplication(f.read(),_subtype="pdf")
+    if file != None:
+        #msg.attach(MIMEText(message, "plain"))
+        with open(file, "rb") as f:
+            #attach = email.mime.application.MIMEApplication(f.read(),_subtype="pdf")
+            attach = MIMEApplication(f.read(),_subtype="pdf")
             attach.add_header('Content-Disposition','attachment',filename=str(file))
             msg.attach(attach)
 
-     # Send the message via our own SMTP server.
-     server = smtplib.SMTP('localhost')
-     server.send_message(msg)
-     server.quit()
+    # Send the message via our own SMTP server.
+    server = smtplib.SMTP('localhost')
+    server.send_message(msg)
+    server.quit()
 
 def send_error(username, error):
     generate_email("automation@example.com", username+"@example.com", error, "Please check your system and resolve the issue as soon as possible.")
