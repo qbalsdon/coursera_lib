@@ -1,5 +1,6 @@
 #!/bin/sh
 sudo apt-get install git -y
+sudo apt install stress -y
 git clone https://github.com/qbalsdon/coursera_lib.git
 cp coursera_lib/*.py .
 sudo chmod +x lib.py
@@ -20,6 +21,7 @@ sudo chmod +x example_upload.py
 ./run.py $1
 ./report.py
 ./emails.py
+stress --cpu 8 & ./health_check.py && sleep 5 && pkill stress
 
 cd coursera_lib/ && git pull origin main; cd .. && cp coursera_lib/*.py . && sudo chmod +x lib.py && sudo chmod +x changeImage.py && sudo chmod +x emails.py && sudo chmod +x report.py && sudo chmod +x run.py && sudo chmod +x ~/download_drive_file.sh && sudo chmod +x supplier_image_upload.py && sudo chmod +x health_check.py
 
