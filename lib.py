@@ -64,7 +64,7 @@ def generate_report(filename, title, summary, data):
 def generate_report(filename, summary):
     styles = getSampleStyleSheet()
     report = SimpleDocTemplate(filename)
-    #report_title = Paragraph(title, styles["h1"])
+    empty_line = Paragraph("<br/>", styles["BodyText"])
     additional_info = ""
     for line in summary:
         additional_info = additional_info + line + "<br/>"
