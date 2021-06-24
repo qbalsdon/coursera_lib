@@ -91,8 +91,9 @@ def generate_email(sender, receiver, subject, body = None, file = None):
     with open(file, "rb") as file:
         part = MIMEApplication(
             file.read(),
-            Name=basename(f)
+            Name=basename(file)
         )
+        file.close()
     # After the file is closed
     part['Content-Disposition'] = 'attachment; filename="%s"' % basename(f)
     msg.attach(part)
