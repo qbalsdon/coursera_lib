@@ -21,6 +21,15 @@ sudo chmod +x example_upload.py
 ./report.py
 ./emails.py
 
+cd coursera_lib/ && git pull origin main; cd .. && cp coursera_lib/*.py .
+sudo chmod +x lib.py
+sudo chmod +x changeImage.py
+sudo chmod +x emails.py
+sudo chmod +x report.py
+sudo chmod +x run.py
+sudo chmod +x ~/download_drive_file.sh
+sudo chmod +x supplier_image_upload.py
+sudo chmod +x health_check.py
 
 PEM="qwikLABS-L2517-31339933.pem"
 USR="student-00-edeeb3bb0dd2"
