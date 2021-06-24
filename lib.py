@@ -8,6 +8,7 @@ from reportlab.platypus import SimpleDocTemplate
 from reportlab.platypus import Paragraph, Spacer, Table, Image
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
+from datetime import date
 
 import smtplib
 from email.message import EmailMessage
@@ -52,14 +53,13 @@ def uploadImage(file, url):
 def generate_report(filename, title, summary, data):
     styles = getSampleStyleSheet()
     report = SimpleDocTemplate(filename)
-    #report_title = Paragraph(title, styles["h1"])
+    report_title = Paragraph(title, styles["h1"])
     additional_info = ""
     for line in summary:
         additional_info = additional_info + line + "<br/>"
     report_info = Paragraph(additional_info, styles["BodyText"])
 
-    #report.build([report_title, empty_line, report_info])
-    report.build([report_info])
+    report.build([report_title, empty_line, report_info])
 
 def generate_report(filename, summary):
     styles = getSampleStyleSheet()
@@ -70,8 +70,9 @@ def generate_report(filename, summary):
         additional_info = additional_info + line + "<br/>"
     report_info = Paragraph(additional_info, styles["BodyText"])
 
-    #report.build([report_title, empty_line, report_info])
-    report.build([report_info])
+    report_title = Paragraph("Report " + date.today(), styles["h1"])
+
+    report.build([report_title, empty_line, report_info])
 
 def generate_email(sender, receiver, subject, body = None, file = None):
     msg = EmailMessage()
