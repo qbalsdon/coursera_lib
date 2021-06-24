@@ -2,4 +2,4 @@
 
 from lib import *
 
-health_check(user = os.environ['USER'])
+health_check(os.environ['USER'])
