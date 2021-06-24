@@ -75,22 +75,28 @@ def generate_report(filename, summary):
     report.build([report_title, empty_line, report_info])
 
 def generate_email(sender, receiver, subject, body = None, file = None):
-    msg = EmailMessage()
-    msg['Subject'] = subject
+    from os.path import basename
+    from email.mime.application import MIMEApplication
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+
+    msg = MIMEMultipart()
     msg['From'] = sender
     msg['To'] = receiver
+    msg['Subject'] = subject
     if body != None:
-        msg.set_content(body)
+        message = MIMEText(body)
+        msg.attach(message)
 
-    if file != None:
-        #msg.attach(MIMEText(msg, "plain"))
-        with open(file, "rb") as f:
-            attach = msg.mime.application.MIMEApplication(f.read(),_subtype="pdf")
-            attach = MIMEApplication(f.read(),_subtype="pdf")
-            attach.add_header('Content-Disposition','attachment',filename=str(file))
-            msg.attach(attach)
+    with open(file, "rb") as file:
+        part = MIMEApplication(
+            file.read(),
+            Name=basename(f)
+        )
+    # After the file is closed
+    part['Content-Disposition'] = 'attachment; filename="%s"' % basename(f)
+    msg.attach(part)
 
-    # Send the message via our own SMTP server.
     server = smtplib.SMTP('localhost')
     server.send_message(msg)
     server.quit()
