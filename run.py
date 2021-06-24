@@ -20,7 +20,7 @@ def convertJson(source, name):
     return json.dumps(result)
 
 def upload(payload):
-    url = "http://35.223.61.254/fruits/"
+    url = "http://"+sys.argv[1]+"/fruits/"
     result = requests.post(url, json = payload)
     if (result.ok):
         print("  ~~ UPLOAD: Success ~~")
