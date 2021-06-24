@@ -21,9 +21,9 @@ sudo chmod +x example_upload.py
 ./emails.py
 
 
-PEM="qwikLABS-L2517-31336330.pem"
-USR="student-02-93bf73818937"
-ADD="35.223.61.254"
+PEM="qwikLABS-L2517-31339933.pem"
+USR="student-00-edeeb3bb0dd2"
+ADD="35.232.212.130"
 scp -i ~/Downloads/${PEM} ${USR}@${ADD}:/home/${USR}/processed.pdf processed.pdf
 
 

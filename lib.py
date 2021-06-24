@@ -72,7 +72,7 @@ def generate_report(filename, summary):
 
     formatter = "%B, %d %Y"
     formatted_date = date.today().strftime(formatter)
-    report_title = Paragraph("Processed Update on " + str(date.today()), styles["h1"])
+    report_title = Paragraph("Processed Update on " + formatted_date, styles["h1"])
 
     report.build([report_title, empty_line, report_info])
 
