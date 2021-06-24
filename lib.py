@@ -98,7 +98,7 @@ def send_error(username, error):
     generate_email("automation@example.com", username+"@example.com", error, "Please check your system and resolve the issue as soon as possible.")
 
 def health_check(username):
-    cpu = psutil.cpu_percent(60)
+    cpu = psutil.cpu_percent(4)
     if cpu >= 80:
         send_error(username, "Error - CPU usage is over 80%")
 
@@ -107,6 +107,7 @@ def health_check(username):
         send_error(username, "Error - Available disk space is less than 20%")
 
     mem = psutil.virtual_memory()
+    print(mem)
     if mem < 500000000:
         send_error(username, "Error - Available memory is less than 500MB")
 
