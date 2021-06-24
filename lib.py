@@ -83,9 +83,9 @@ def generate_email(sender, receiver, subject, body = None, file = None):
         msg.set_content(body)
 
     if file != None:
-        #msg.attach(MIMEText(message, "plain"))
+        msg.attach(MIMEText(message, "plain"))
         with open(file, "rb") as f:
-            #attach = email.mime.application.MIMEApplication(f.read(),_subtype="pdf")
+            attach = email.mime.application.MIMEApplication(f.read(),_subtype="pdf")
             attach = MIMEApplication(f.read(),_subtype="pdf")
             attach.add_header('Content-Disposition','attachment',filename=str(file))
             msg.attach(attach)
