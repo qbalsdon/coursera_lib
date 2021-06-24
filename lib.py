@@ -49,29 +49,16 @@ def uploadImage(file, url):
             print("  !! Error !!")
         stream.close()
 
-def generate(filename, title, additional_info, table_data):
-  styles = getSampleStyleSheet()
-  report = SimpleDocTemplate(filename)
-  report_title = Paragraph(title, styles["h1"])
-  report_info = Paragraph(additional_info, styles["BodyText"])
-  table_style = [('GRID', (0,0), (-1,-1), 1, colors.black),
-                ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-                ('ALIGN', (0,0), (-1,-1), 'CENTER')]
-  report_table = Table(data=table_data, style=table_style, hAlign="LEFT")
-  empty_line = Spacer(1,20)
-  report.build([report_title, empty_line, report_info, empty_line, report_table])
-
 def generate_report(filename, title, summary, data):
-  styles = getSampleStyleSheet()
-  report = SimpleDocTemplate(filename)
-  report_title = Paragraph(title, styles["h1"])
-  additional_info = ""
-  for line in summary:
-    additional_info = additional_info + line + "<br/>"
+    styles = getSampleStyleSheet()
+    report = SimpleDocTemplate(filename)
+    report_title = Paragraph(title, styles["h1"])
+    additional_info = ""
+    for line in summary:
+        additional_info = additional_info + line + "<br/>"
+    report_info = Paragraph(additional_info, styles["BodyText"])
 
-  report_info = Paragraph(additional_info, styles["BodyText"])
-
-  report.build([report_title, empty_line, report_info])
+    report.build([report_title, empty_line, report_info])
 
  def generate_email(sender, receiver, subject, body = None, file = None):
      msg = EmailMessage()
