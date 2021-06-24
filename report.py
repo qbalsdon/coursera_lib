@@ -17,7 +17,8 @@ def process(file):
 
 def churn(data):
     response=[]
-    for key in sorted(data.keys()):
+    #for key in sorted(data.keys()):
+    for key in data.keys():
         response = response + ["<br/>", "name: "+key, "weight:" + data[key]]
     return response
 
