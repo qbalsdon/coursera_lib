@@ -107,8 +107,7 @@ def health_check(username):
         send_error(username, "Error - Available disk space is less than 20%")
 
     mem = psutil.virtual_memory()
-    print(mem.available)
-    if mem < 500000000:
+    if mem.available < 500000000:
         send_error(username, "Error - Available memory is less than 500MB")
 
     name = socket.gethostbyname('localhost')
