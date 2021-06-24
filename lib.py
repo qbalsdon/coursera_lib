@@ -80,7 +80,7 @@ def generate_email(sender, receiver, subject, body = None, file = None):
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
 
-    msg = MIMEMultipart()
+    msg = EmailMessage()
     msg['From'] = sender
     msg['To'] = receiver
     msg['Subject'] = subject
