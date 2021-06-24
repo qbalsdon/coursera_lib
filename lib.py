@@ -88,15 +88,9 @@ def generate_email(sender, receiver, subject, body = None, file = None):
         message = MIMEText(body)
         msg.attach(message)
 
-    with open(file, "rb") as file:
-        part = MIMEApplication(
-            file.read(),
-            Name=basename(file)
-        )
-        file.close()
-    # After the file is closed
-    part['Content-Disposition'] = 'attachment; filename="%s"' % basename(f)
-    msg.attach(part)
+    with open(file, 'rb') as fp:
+        data = fp.read()
+        msg.add_attachment(data, maintype='pdf')
 
     server = smtplib.SMTP('localhost')
     server.send_message(msg)
