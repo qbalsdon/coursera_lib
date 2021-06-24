@@ -5,6 +5,7 @@ from lib import *
 import os
 import requests
 import json
+import sys
 
 source_dir = "./supplier-data/descriptions/"
 
