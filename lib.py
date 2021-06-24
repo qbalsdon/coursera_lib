@@ -70,7 +70,7 @@ def generate_report(filename, summary):
         additional_info = additional_info + line + "<br/>"
     report_info = Paragraph(additional_info, styles["BodyText"])
 
-    report_title = Paragraph("Report " + date.today(), styles["h1"])
+    report_title = Paragraph("Report " + str(date.today()), styles["h1"])
 
     report.build([report_title, empty_line, report_info])
 
