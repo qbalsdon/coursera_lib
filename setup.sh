@@ -17,6 +17,8 @@ tar xf ~/supplier-data.tar.gz
 sudo chmod +x example_upload.py
 ./example_upload.py
 ./run.py $1
+./report.py
+./emails.py
 
 
 PEM="qwikLABS-L2517-31336330.pem"
