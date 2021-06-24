@@ -75,23 +75,19 @@ def generate_report(filename, summary):
     report.build([report_title, empty_line, report_info])
 
 def generate_email(sender, receiver, subject, body = None, file = None):
-    from os.path import basename
-    from email.mime.application import MIMEApplication
-    from email.mime.multipart import MIMEMultipart
-    from email.mime.text import MIMEText
-
     msg = EmailMessage()
+    msg['Subject'] = subject
     msg['From'] = sender
     msg['To'] = receiver
-    msg['Subject'] = subject
     if body != None:
-        message = MIMEText(body)
-        msg.attach(message)
+        msg.set_content(body)
 
-    with open(file, 'rb') as fp:
-        data = fp.read()
-        msg.add_attachment(data, maintype='pdf')
+    if file != None:
+        with open(file, 'rb') as content_file:
+            content = content_file.read()
+            msg.add_attachment(content, maintype='application', subtype='pdf', filename='processed.pdf')
 
+    # Send the message via our own SMTP server.
     server = smtplib.SMTP('localhost')
     server.send_message(msg)
     server.quit()
